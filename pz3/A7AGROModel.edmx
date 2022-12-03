@@ -1,0 +1,823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище A7_AGROModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Description0" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Characteristics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Brand" Type="int" />
+          <Property Name="Category" Type="varchar" MaxLength="3" />
+          <Property Name="Color" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="License" />
+          </Key>
+          <Property Name="License" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="SeconName" Type="varchar" MaxLength="100" />
+          <Property Name="ThirdName" Type="varchar" MaxLength="100" />
+          <Property Name="Experience" Type="int" />
+          <Property Name="Category" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Mechanics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="SeconName" Type="varchar" MaxLength="100" />
+          <Property Name="ThirdName" Type="varchar" MaxLength="100" />
+          <Property Name="Specialization" Type="int" />
+          <Property Name="Experience" Type="int" />
+        </EntityType>
+        <EntityType Name="Parking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Busy" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="VIN" Type="varchar" MaxLength="50" />
+          <Property Name="Mechanic" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Specializations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name0" Type="varchar" MaxLength="50" />
+          <Property Name="Description0" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Troubles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name0" Type="varchar" MaxLength="100" />
+          <Property Name="Description0" Type="varchar" MaxLength="500" />
+          <Property Name="Repair_price" Type="int" />
+        </EntityType>
+        <EntityType Name="Troubles_list">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Report" Type="int" />
+          <Property Name="Trouble" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="login0" />
+          </Key>
+          <Property Name="login0" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password0" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role0" Type="int" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="VIN" />
+          </Key>
+          <Property Name="VIN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Driver" Type="int" />
+          <Property Name="Characteristic" Type="int" />
+          <Property Name="Parking_number" Type="int" />
+        </EntityType>
+        <Association Name="FK__Character__Brand__403A8C7D">
+          <End Role="Brands" Type="Self.Brands" Multiplicity="0..1" />
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Characteristics">
+              <PropertyRef Name="Brand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Character__Categ__412EB0B6">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Characteristics">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Drivers__Categor__3B75D760">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mechanics__Speci__49C3F6B7">
+          <End Role="Specializations" Type="Self.Specializations" Multiplicity="0..1" />
+          <End Role="Mechanics" Type="Self.Mechanics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specializations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mechanics">
+              <PropertyRef Name="Specialization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reports__Mechani__4D94879B">
+          <End Role="Mechanics" Type="Self.Mechanics" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mechanics">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="Mechanic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reports__VIN__4CA06362">
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="VIN" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="VIN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Troubles___Repor__17036CC0">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="0..1" />
+          <End Role="Troubles_list" Type="Self.Troubles_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Troubles_list">
+              <PropertyRef Name="Report" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Troubles___Troub__17F790F9">
+          <End Role="Troubles" Type="Self.Troubles" Multiplicity="0..1" />
+          <End Role="Troubles_list" Type="Self.Troubles_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Troubles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Troubles_list">
+              <PropertyRef Name="Trouble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__Role0__04E4BC85">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role0" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicles__Charac__44FF419A">
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="0..1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristics">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Characteristic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicles__Driver__440B1D61">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="License" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_One_Two">
+          <End Role="Parking" Type="Self.Parking" Multiplicity="0..1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Parking_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище A7_AGROModelContainer">
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Characteristics" EntityType="Self.Characteristics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mechanics" EntityType="Self.Mechanics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parking" EntityType="Self.Parking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specializations" EntityType="Self.Specializations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Troubles" EntityType="Self.Troubles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Troubles_list" EntityType="Self.Troubles_list" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Character__Brand__403A8C7D" Association="Self.FK__Character__Brand__403A8C7D">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="Characteristics" EntitySet="Characteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Character__Categ__412EB0B6" Association="Self.FK__Character__Categ__412EB0B6">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Characteristics" EntitySet="Characteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Drivers__Categor__3B75D760" Association="Self.FK__Drivers__Categor__3B75D760">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mechanics__Speci__49C3F6B7" Association="Self.FK__Mechanics__Speci__49C3F6B7">
+            <End Role="Specializations" EntitySet="Specializations" />
+            <End Role="Mechanics" EntitySet="Mechanics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reports__Mechani__4D94879B" Association="Self.FK__Reports__Mechani__4D94879B">
+            <End Role="Mechanics" EntitySet="Mechanics" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reports__VIN__4CA06362" Association="Self.FK__Reports__VIN__4CA06362">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Troubles___Repor__17036CC0" Association="Self.FK__Troubles___Repor__17036CC0">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Troubles_list" EntitySet="Troubles_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Troubles___Troub__17F790F9" Association="Self.FK__Troubles___Troub__17F790F9">
+            <End Role="Troubles" EntitySet="Troubles" />
+            <End Role="Troubles_list" EntitySet="Troubles_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__Role0__04E4BC85" Association="Self.FK__Users__Role0__04E4BC85">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicles__Charac__44FF419A" Association="Self.FK__Vehicles__Charac__44FF419A">
+            <End Role="Characteristics" EntitySet="Characteristics" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicles__Driver__440B1D61" Association="Self.FK__Vehicles__Driver__440B1D61">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_One_Two" Association="Self.FK_One_Two">
+            <End Role="Parking" EntitySet="Parking" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="A7_AGROModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Characteristics" Relationship="Self.FK__Character__Brand__403A8C7D" FromRole="Brands" ToRole="Characteristics" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description0" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Characteristics" Relationship="Self.FK__Character__Categ__412EB0B6" FromRole="Categories" ToRole="Characteristics" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK__Drivers__Categor__3B75D760" FromRole="Categories" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="Characteristics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Brand" Type="Int32" />
+          <Property Name="Category" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Brands" Relationship="Self.FK__Character__Brand__403A8C7D" FromRole="Characteristics" ToRole="Brands" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__Character__Categ__412EB0B6" FromRole="Characteristics" ToRole="Categories" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK__Vehicles__Charac__44FF419A" FromRole="Characteristics" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="License" />
+          </Key>
+          <Property Name="License" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SeconName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ThirdName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Experience" Type="Int32" />
+          <Property Name="Category" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK__Drivers__Categor__3B75D760" FromRole="Drivers" ToRole="Categories" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK__Vehicles__Driver__440B1D61" FromRole="Drivers" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Mechanics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SeconName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ThirdName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Specialization" Type="Int32" />
+          <Property Name="Experience" Type="Int32" />
+          <NavigationProperty Name="Specializations" Relationship="Self.FK__Mechanics__Speci__49C3F6B7" FromRole="Mechanics" ToRole="Specializations" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK__Reports__Mechani__4D94879B" FromRole="Mechanics" ToRole="Reports" />
+        </EntityType>
+        <EntityType Name="Parking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Busy" Type="Byte" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK_One_Two" FromRole="Parking" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="VIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mechanic" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Mechanics" Relationship="Self.FK__Reports__Mechani__4D94879B" FromRole="Reports" ToRole="Mechanics" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK__Reports__VIN__4CA06362" FromRole="Reports" ToRole="Vehicles" />
+          <NavigationProperty Name="Troubles_list" Relationship="Self.FK__Troubles___Repor__17036CC0" FromRole="Reports" ToRole="Troubles_list" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__Role0__04E4BC85" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Specializations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name0" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description0" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mechanics" Relationship="Self.FK__Mechanics__Speci__49C3F6B7" FromRole="Specializations" ToRole="Mechanics" />
+        </EntityType>
+        <EntityType Name="Troubles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name0" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description0" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Repair_price" Type="Int32" />
+          <NavigationProperty Name="Troubles_list" Relationship="Self.FK__Troubles___Troub__17F790F9" FromRole="Troubles" ToRole="Troubles_list" />
+        </EntityType>
+        <EntityType Name="Troubles_list">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Report" Type="Int32" />
+          <Property Name="Trouble" Type="Int32" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK__Troubles___Repor__17036CC0" FromRole="Troubles_list" ToRole="Reports" />
+          <NavigationProperty Name="Troubles" Relationship="Self.FK__Troubles___Troub__17F790F9" FromRole="Troubles_list" ToRole="Troubles" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="login0" />
+          </Key>
+          <Property Name="login0" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password0" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role0" Type="Int32" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Users__Role0__04E4BC85" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="VIN" />
+          </Key>
+          <Property Name="VIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Driver" Type="Int32" />
+          <Property Name="Characteristic" Type="Int32" />
+          <Property Name="Parking_number" Type="Int32" />
+          <NavigationProperty Name="Characteristics" Relationship="Self.FK__Vehicles__Charac__44FF419A" FromRole="Vehicles" ToRole="Characteristics" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK__Vehicles__Driver__440B1D61" FromRole="Vehicles" ToRole="Drivers" />
+          <NavigationProperty Name="Parking" Relationship="Self.FK_One_Two" FromRole="Vehicles" ToRole="Parking" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK__Reports__VIN__4CA06362" FromRole="Vehicles" ToRole="Reports" />
+        </EntityType>
+        <Association Name="FK__Character__Brand__403A8C7D">
+          <End Role="Brands" Type="Self.Brands" Multiplicity="0..1" />
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Characteristics">
+              <PropertyRef Name="Brand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Character__Categ__412EB0B6">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Characteristics">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Drivers__Categor__3B75D760">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicles__Charac__44FF419A">
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="0..1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristics">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Characteristic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicles__Driver__440B1D61">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="License" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mechanics__Speci__49C3F6B7">
+          <End Role="Specializations" Type="Self.Specializations" Multiplicity="0..1" />
+          <End Role="Mechanics" Type="Self.Mechanics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specializations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mechanics">
+              <PropertyRef Name="Specialization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reports__Mechani__4D94879B">
+          <End Role="Mechanics" Type="Self.Mechanics" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mechanics">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="Mechanic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_One_Two">
+          <End Role="Parking" Type="Self.Parking" Multiplicity="0..1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Parking_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reports__VIN__4CA06362">
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="VIN" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="VIN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Troubles___Repor__17036CC0">
+          <End Role="Reports" Type="Self.Reports" Multiplicity="0..1" />
+          <End Role="Troubles_list" Type="Self.Troubles_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reports">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Troubles_list">
+              <PropertyRef Name="Report" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__Role0__04E4BC85">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role0" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Troubles___Troub__17F790F9">
+          <End Role="Troubles" Type="Self.Troubles" Multiplicity="0..1" />
+          <End Role="Troubles_list" Type="Self.Troubles_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Troubles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Troubles_list">
+              <PropertyRef Name="Trouble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="A7_AGROEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brands" EntityType="Self.Brands" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Characteristics" EntityType="Self.Characteristics" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" />
+          <EntitySet Name="Mechanics" EntityType="Self.Mechanics" />
+          <EntitySet Name="Parking" EntityType="Self.Parking" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Specializations" EntityType="Self.Specializations" />
+          <EntitySet Name="Troubles" EntityType="Self.Troubles" />
+          <EntitySet Name="Troubles_list" EntityType="Self.Troubles_list" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicles" />
+          <AssociationSet Name="FK__Character__Brand__403A8C7D" Association="Self.FK__Character__Brand__403A8C7D">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="Characteristics" EntitySet="Characteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Character__Categ__412EB0B6" Association="Self.FK__Character__Categ__412EB0B6">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Characteristics" EntitySet="Characteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Drivers__Categor__3B75D760" Association="Self.FK__Drivers__Categor__3B75D760">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicles__Charac__44FF419A" Association="Self.FK__Vehicles__Charac__44FF419A">
+            <End Role="Characteristics" EntitySet="Characteristics" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicles__Driver__440B1D61" Association="Self.FK__Vehicles__Driver__440B1D61">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mechanics__Speci__49C3F6B7" Association="Self.FK__Mechanics__Speci__49C3F6B7">
+            <End Role="Specializations" EntitySet="Specializations" />
+            <End Role="Mechanics" EntitySet="Mechanics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reports__Mechani__4D94879B" Association="Self.FK__Reports__Mechani__4D94879B">
+            <End Role="Mechanics" EntitySet="Mechanics" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_One_Two" Association="Self.FK_One_Two">
+            <End Role="Parking" EntitySet="Parking" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reports__VIN__4CA06362" Association="Self.FK__Reports__VIN__4CA06362">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Troubles___Repor__17036CC0" Association="Self.FK__Troubles___Repor__17036CC0">
+            <End Role="Reports" EntitySet="Reports" />
+            <End Role="Troubles_list" EntitySet="Troubles_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__Role0__04E4BC85" Association="Self.FK__Users__Role0__04E4BC85">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Troubles___Troub__17F790F9" Association="Self.FK__Troubles___Troub__17F790F9">
+            <End Role="Troubles" EntitySet="Troubles" />
+            <End Role="Troubles_list" EntitySet="Troubles_list" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище A7_AGROModelContainer" CdmEntityContainer="A7_AGROEntities">
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="A7_AGROModel.Brands">
+              <MappingFragment StoreEntitySet="Brands">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="A7_AGROModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description0" ColumnName="Description0" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Characteristics">
+            <EntityTypeMapping TypeName="A7_AGROModel.Characteristics">
+              <MappingFragment StoreEntitySet="Characteristics">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="A7_AGROModel.Drivers">
+              <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="License" ColumnName="License" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SeconName" ColumnName="SeconName" />
+                <ScalarProperty Name="ThirdName" ColumnName="ThirdName" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mechanics">
+            <EntityTypeMapping TypeName="A7_AGROModel.Mechanics">
+              <MappingFragment StoreEntitySet="Mechanics">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SeconName" ColumnName="SeconName" />
+                <ScalarProperty Name="ThirdName" ColumnName="ThirdName" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parking">
+            <EntityTypeMapping TypeName="A7_AGROModel.Parking">
+              <MappingFragment StoreEntitySet="Parking">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Busy" ColumnName="Busy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="A7_AGROModel.Reports">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="Mechanic" ColumnName="Mechanic" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="A7_AGROModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specializations">
+            <EntityTypeMapping TypeName="A7_AGROModel.Specializations">
+              <MappingFragment StoreEntitySet="Specializations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name0" ColumnName="Name0" />
+                <ScalarProperty Name="Description0" ColumnName="Description0" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Troubles">
+            <EntityTypeMapping TypeName="A7_AGROModel.Troubles">
+              <MappingFragment StoreEntitySet="Troubles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name0" ColumnName="Name0" />
+                <ScalarProperty Name="Description0" ColumnName="Description0" />
+                <ScalarProperty Name="Repair_price" ColumnName="Repair_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Troubles_list">
+            <EntityTypeMapping TypeName="A7_AGROModel.Troubles_list">
+              <MappingFragment StoreEntitySet="Troubles_list">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Report" ColumnName="Report" />
+                <ScalarProperty Name="Trouble" ColumnName="Trouble" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="A7_AGROModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="login0" ColumnName="login0" />
+                <ScalarProperty Name="password0" ColumnName="password0" />
+                <ScalarProperty Name="Role0" ColumnName="Role0" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="A7_AGROModel.Vehicles">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="Driver" ColumnName="Driver" />
+                <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
+                <ScalarProperty Name="Parking_number" ColumnName="Parking_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

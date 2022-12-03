@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="11f482b30ba74ee08c8e425eb341c56d" Name="Diagram1">
+        <EntityTypeShape EntityType="A7_AGROModel.Brands" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Categories" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Characteristics" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Drivers" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Mechanics" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Parking" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Reports" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Roles" Width="1.5" PointX="5.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Specializations" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Troubles" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Troubles_list" Width="1.5" PointX="9.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Users" Width="1.5" PointX="8" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="A7_AGROModel.Vehicles" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="A7_AGROModel.FK__Character__Brand__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Character__Categ__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Drivers__Categor__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Vehicles__Charac__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Vehicles__Driver__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Mechanics__Speci__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Reports__Mechani__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK_One_Two" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Reports__VIN__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Troubles___Repor__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Users__Role0__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="A7_AGROModel.FK__Troubles___Troub__17F790F9" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,113 @@
+﻿<Window x:Class="pz3.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pz3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="460" Width="800" Background="AliceBlue" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Background="Bisque" Grid.ColumnSpan="5" VerticalAlignment="Top" Height="44">
+            <MenuItem Background="AntiqueWhite" Margin="5" Header="File">
+                <MenuItem x:Name="exportBtn" Header="Export" Click="MenuItem_Click"/>
+            </MenuItem>
+            
+            <!--<Menu.Effect>
+                <DropShadowEffect ShadowDepth="5" BlurRadius="10"/>
+            </Menu.Effect>-->
+        </Menu>
+
+        <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="TABLE: " FontWeight="Bold" FontSize="16"/>
+        <ComboBox x:Name="comboBoxTables" Grid.Column="1" VerticalAlignment="Center" Background="White" SelectionChanged="comboBoxTables_SelectionChanged" >
+            <ComboBox.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </ComboBox.Effect>
+        </ComboBox>
+
+        <DataGrid x:Name="dataGridTroubles" Grid.ColumnSpan="3" Grid.RowSpan="4" Margin="5,73,5,73" IsReadOnly="True">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>
+
+        <!--<DataGrid x:Name="dataGridBrands" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5,55,5,5">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>
+        <DataGrid x:Name="dataGridReports" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5,55,5,5">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>
+        <DataGrid x:Name="dataGridDrivers" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5,55,5,5">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>
+        <DataGrid x:Name="dataGridParking" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5,55,5,5">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>
+        <DataGrid x:Name="dataGridCharacteristics" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5,55,5,5">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>
+        <DataGrid x:Name="dataGridCategories" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5,55,5,5">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>
+        <DataGrid x:Name="dataGridVehicles" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5,55,5,5">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>
+        <DataGrid x:Name="dataGridMechanics" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5,55,5,5">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>
+        <DataGrid x:Name="dataGridSpecializations" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5,55,5,5">
+            <DataGrid.Effect>
+                <DropShadowEffect BlurRadius="15"/>
+            </DataGrid.Effect>
+        </DataGrid>-->
+
+
+        <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="4">
+            <TextBox x:Name="tbid" Margin="5" Background="White" Text="{Binding SelectedItem.Id ,ElementName=dataGridTroubles}"/>
+            <TextBox x:Name="tbname" Margin="5" Text="{Binding SelectedItem.Name0 ,ElementName=dataGridTroubles}"/>
+            <TextBox x:Name="tbdis" Margin="5" Text="{Binding SelectedItem.Description0 ,ElementName=dataGridTroubles}"/>
+            <TextBox x:Name="tbdprice" Margin="5" Text="{Binding SelectedItem.Repair_price ,ElementName=dataGridTroubles}"/>
+
+            <Button Margin="10" Content="add" Cursor="Hand" Click="Button_Click_1"/>
+            <Button Margin="10" Content="edit" Cursor="Hand" Click="Button_Click_2"/>
+            <Button Margin="10" Content="delete" Click="Button_Click"/>
+        </StackPanel>
+
+        <Button x:Name="btnChildTable" Click="btnChildTable_Click" Margin="10,44,115,10" Grid.Row="4"/>
+
+        <ComboBox x:Name="cbT" Grid.Row="3" Grid.Column="1" Background="AntiqueWhite" ItemsSource="{Binding}" SelectedValuePath="Id" DisplayMemberPath="Name0" SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
+
+        <Button Grid.Row="3" Grid.Column="2" Margin="55,20,55,20" Content="↺" FontWeight="Bold" FontSize="22" VerticalAlignment="Center" Click="Button_Click_3"/>
+    </Grid>
+</Window>
